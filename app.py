@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_sqlalchemy import AQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_restful import Api, Resource
 
@@ -25,7 +25,7 @@ class Evento_Schema(ma.Schema):
         fields = ("id", "nombre", "categoria", "lugar", "direccion", "fechaInicio", "fechaFin", "presencial")
 
 post_schema = Evento_Schema()
-post_schema = Evento_Schema(many = True)
+posts_schema = Evento_Schema(many = True)
 
 class RecursoListarEventos(Resource):
         def get(self):
@@ -41,10 +41,10 @@ class RecursoListarEventos(Resource):
                         fechaInicio = request.json['fechaInicio'],
                         fechaFin = request.json['fehcaFin'],
                         presencial = request.json['presencial']
-                        )
-                        db.session.add(nueva_evento)
-                        db.session.commit()
-                        return post_schema.dump(nueva_evento)
+                )
+                db.session.add(nuevo_evento)
+                db.session.commit()
+                return post_schema.dump(nueva_evento)
 
 api.add_resource(RecursoListarEventos,'/eventos')
 
