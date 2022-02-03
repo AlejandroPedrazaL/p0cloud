@@ -2,8 +2,10 @@ from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_restful import Resource, Api
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app, support_credentials=True)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
@@ -61,13 +63,13 @@ class RecursoUnEvento(Resource):
         if 'lugar' in request.json:
             evento.lugar = request.json['lugar']
         if 'direccion' in request.json:
-            evento.direccion = request.json['dirrecion']
+            evento.direccion = request.json['direccion']
         if 'fechaInicio' in request.json:
             evento.fechaInicio = request.json['fechaInicio']
         if 'fechaFin' in request.json:
             evento.fechaFin = request.json['fechaFin']
-        if 'nombre' in request.json:
-            evento.presencial = request.json['presencial']
+        if 'modalidad' in request.json:
+            evento.modalidad = request.json['modalidad']
 
         db.session.commit()
         return post_schema.dump(evento)
