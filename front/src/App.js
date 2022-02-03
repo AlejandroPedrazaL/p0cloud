@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { Form } from 'react-bootstrap';
 
-const url = "http://127.0.0.1:5000/eventos";
+const url = "http://172.24.41.242:8080/eventos";
 
 class App extends Component {
   state={
